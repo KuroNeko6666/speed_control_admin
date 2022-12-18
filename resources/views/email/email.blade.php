@@ -1,0 +1,1 @@
+Validasi Email {{ $token }}
