@@ -20,9 +20,9 @@ class Login extends Component
         if(auth()->user()->is_email_verified == 1){
             return redirect()->route("home");
         }
-        return session()->flash('error', 'validate your account!');
+        return session()->flash('error', 'Email anda tidak terverifikasi.');
        }
-       return session()->flash('error', 'Login fail');
+       return session()->flash('error', 'Gagal login.');
 
 
     }

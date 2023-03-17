@@ -28,7 +28,7 @@ use App\Http\Livewire\Home\AccountManagement\OperatorManagement;
 
 Route::middleware(['checkstatus'])->group(function () {
     Route::get('/', function (){ return redirect()->route('home'); });
-    Route::get('/dashboard', Dashboard::class)->name("home");
+    Route::get('/home', Dashboard::class)->name("home");
     Route::get('/account/admin-management', AdminManagement::class);
     Route::get('/account/operator-management', OperatorManagement::class);
     Route::get('/account/user-management', UserManagement::class);

@@ -14,6 +14,7 @@ use \Illuminate\Database\QueryException;
 class Register extends Component
 {
     public $name, $email, $password, $role;
+    public $isLoading = false;
 
     protected $rules = [
         "name" => 'required|min:3|max:255',
@@ -25,8 +26,8 @@ class Register extends Component
     public function submit()
     {
         $credential = $this->validate();
+        $this->isLoading = true;
         $credential["password"] = bcrypt($credential["password"]);
-
         try {
             $user = User::create($credential);
             $validation = [
@@ -35,10 +36,12 @@ class Register extends Component
             ];
             $data = EmailVerification::create($validation);
             Mail::to($user->email)->send(new SpeedControlEmail($data->token));
+            $this->isLoading = false;
+            session()->flash('success', 'Akun Berhasil didaftarkan, verifikasi terlebih dahulu.');
             return redirect()->route("login");
 
         } catch(QueryException $e){
-            dd($e);
+            session()->flash('error', 'Gagal mendaftar');
         }
 
     }

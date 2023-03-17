@@ -1,14 +1,26 @@
 <div>
+    @if (session()->has('error'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="auth-form-light text-left py-5 px-4 px-sm-5">
         <div class="brand-logo">
-            <img src="/images/logo.svg" alt="logo">
+            <span>Speed</span><span class="text-primary">Control</span>
         </div>
-        <h4>Hello! let's get started</h4>
-        <h6 class="fw-light">Sign up to continue.</h6>
+        <h6 class="fw-light">Daftar untuk membuat akun!</h6>
         <form class="pt-3" wire:submit.prevent='submit'>
             <div class="form-group">
                 <input wire:model='name' type="name"
-                    class="form-control form-control-lg @error('name') is-invalid @enderror" placeholder="Username">
+                    class="form-control form-control-lg @error('name') is-invalid @enderror" placeholder="Name">
                 @error('name')
                     <span class="invalid-feedback">
                         {{ $message }}
@@ -49,11 +61,11 @@
                 @enderror
             </div>
             <div class="mt-3">
-                <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN
-                    UP</button>
+                <button type="submit"
+                    class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">DAFTAR</button>
             </div>
             <div class="text-center mt-4 fw-light">
-                Have an account? <a href="/login" class="text-primary">SIGN IN</a>
+                Sudah punya akun? <a href="/login" class="text-primary">Login</a>
             </div>
         </form>
     </div>
